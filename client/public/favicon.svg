@@ -1,0 +1,8 @@
+
+<svg width="100" height="100" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Chat Bubble Icon -->
+  <g transform="translate(10,10)">
+    <path d="M0 10C0 2.268 6.268 -4 14 -4H46C53.732 -4 60 2.268 60 10V30C60 37.732 53.732 44 46 44H18L4 58V30H0V10Z" fill="#4F39F6"/>
+    <path d="M30 18C28.067 18 26.2 19.133 25 20.933C23.8 19.133 21.933 18 20 18C16.667 18 14 20.667 14 24C14 30 25 36 25 36C25 36 36 30 36 24C36 20.667 33.333 18 30 18Z" fill="white"/>
+  </g>
+</svg>
