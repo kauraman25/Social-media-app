@@ -1,5 +1,5 @@
 import { Inngest } from "inngest";
-import User from "../models/user.js";
+import User from "../models/User.js";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "social-media-app" });
@@ -27,7 +27,12 @@ const syncUserCreation = inngest.createFunction(
             profile_picture: image_url,
             username
         }
-        await User.create(userData)
+        try {
+      await User.create(userData);
+      console.log("✅ User created:", userData);
+    } catch (error) {
+      console.error("❌ Error creating user:", error.message);
+    }
         
     }
 )
@@ -51,7 +56,7 @@ const syncUserUpdation = inngest.createFunction(
 )
 //delete user from database
 const syncUserDeletion = inngest.createFunction(
-    {id: 'delete-user-from-clerk'},
+    {id: 'delete-user-with-clerk'},
     {event: 'clerk/user.deleted'},
     async ({event}) => {
         const {id} = event.data
