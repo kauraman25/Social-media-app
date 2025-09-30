@@ -1,12 +1,13 @@
-import path from "path";
+
 import imagekit from "../configs/imageKit.js";
 import User from "../models/user.js";
 import fs from "fs";
-import { toASCII } from "punycode";
+
 
 export const getUserData = async (req, res) => {
   try {
-    const { userId } = req.auth();
+    const { userId } =  req.auth();
+  
     const user = await User.findById(userId);
     if (!user) return res.json({ success: false, message: "user not found" });
     res.json({ success: true, user });
@@ -18,8 +19,8 @@ export const getUserData = async (req, res) => {
 
 export const updateUserData = async (req, res) => {
   try {
-    const { userId } = req.auth();
-    const { username, bio, location, full_name } = req.body;
+    const { userId } =  req.auth();
+    let { username, bio, location, full_name } = req.body;
 
     const tempUser = await User.findById(userId);
 
@@ -49,7 +50,7 @@ export const updateUserData = async (req, res) => {
       });
 
       const url = imagekit.url({
-        path: response.filePath,
+        path: response.filePath, 
         transformation: [
           { quality: "auto" },
           { format: "webp" },
@@ -88,7 +89,7 @@ export const updateUserData = async (req, res) => {
 
 export const discoverUsers = async (req, res) => {
   try {
-    const { userId } = req.auth();
+    const { userId } = await req.auth();
     const { input } = req.body;
 
     const allUsers = await User.find({
@@ -109,7 +110,7 @@ export const discoverUsers = async (req, res) => {
 
 export const followUsers = async (req, res) => {
   try {
-    const { userId } = req.auth();
+    const { userId } = await req.auth();
     const { id } = req.body;
 
     const user = await User.findById(userId);
@@ -155,3 +156,4 @@ export const unfollowUsers = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+

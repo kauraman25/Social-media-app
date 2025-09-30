@@ -27,12 +27,7 @@ const syncUserCreation = inngest.createFunction(
             profile_picture: image_url,
             username
         }
-        try {
       await User.create(userData);
-      console.log("✅ User created:", userData);
-    } catch (error) {
-      console.error("❌ Error creating user:", error.message);
-    }
         
     }
 )

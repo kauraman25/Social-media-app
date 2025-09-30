@@ -11,12 +11,17 @@ await connectDB();
 
 app.use(express.json());
 app.use(cors());
-app.use(clerkMiddleware());
+
 
 app.get('/', (req, res) => {
     res.send('server is running...');
 })
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong!", error: err.message });
+})
+app.use(clerkMiddleware());
 app.use('/api/inngest', serve({ client: inngest, functions }));
 app.use('/api/user', userRouter)
 

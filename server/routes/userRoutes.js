@@ -5,9 +5,9 @@ import { upload } from "../configs/multer.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/data", protect, getUserData);
+userRouter.get('/data', protect, getUserData);
 userRouter.post(
-  "/update",
+  '/update',
   upload.fields([
     { name: "profile", maxCount: 1 },
     { name: "cover", maxCount: 1 },
